@@ -1,0 +1,78 @@
+/* Route::get('about', function () {
+    return view('about');
+});
+
+Route::get('/product/{id}', function (string $id) {
+
+    return "Product ID=$id";
+});
+ */
+Route::view('/about','about');
+
+
+/* Route::view('/contact','contact',['phone'=>'4353535']);
+ */
+
+/* Route::get('/product/{id}',function(string $id){
+    return "Product ID=$id";
+});
+
+
+Route::get('/product/{id}',function(string $id)
+{
+    return "Works! $id";
+})->whereNumber('id');
+ */
+
+ Route::get('/user/{username}',function(string $username){
+
+ })->where('username','[a-z]+');
+
+ Route::get("{lang}/product/{id}",function(string $lang, string $id){
+
+
+ })->where(['lang'=>'[a-z]{2}','id'=> '\d{4,}']);
+
+ Route::get('/search/{search}',function(string $search){
+
+    return $search;
+ })->where('search','.+');
+
+
+
+<!-----Name Routes------>
+
+Route::get('/', function () {
+
+  //  $aboutPageUrl  =  '/about';
+  $aboutPageUrl = route('about');
+  dd($aboutPageUrl);
+    return view('welcome');
+});
+
+Route::view('/about-us', 'about')->name('about');
+
+<!----End Name Routes----->
+
+
+<!----Named Routes with Parameters---->
+
+/* Route::get("/p/{lang}/{id}",function(string $lang, string $id){
+})->name("product.view"); */
+
+Route::get('/user/profile',function(){})->name('profile');
+
+Route::get('/current-user',function(){
+  //  return redirect()->route('profile');
+    return to_route('profile');
+});
+
+<!----End Name Routes with Parameters----->
+
+
+
+<!----Route Groups---->
+
+
+<!----End Routes Groups----->
+
