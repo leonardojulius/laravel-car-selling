@@ -54,8 +54,20 @@ Route::view('/about-us', 'about')->name('about');
 
 <!----End Name Routes----->
 
+<!----Routes Optional Parameters---->
 
-<!----Named Routes with Parameters---->
+Route::get('/product/{category?}',function(string $category = null) {
+
+    return "Product for category=$category";
+});
+
+
+<!----End Routes Optional Parameters----->
+
+<!----End Name Routes----->
+
+
+<!----Routes with Parameters---->
 
 /* Route::get("/p/{lang}/{id}",function(string $lang, string $id){
 })->name("product.view"); */
@@ -71,8 +83,32 @@ Route::get('/current-user',function(){
 
 
 
-<!----Route Groups---->
+<!----Route Groups----->
+Route::prefix('admin')->group(function () {
+      Route::get('/users',function(){
+        echo '/admin/users';
+      });
+});
+
+Route::name('admin.')->group(function () {
+    Route::get('/users',function(){
+        return '/users';
+    });
+});
 
 
-<!----End Routes Groups----->
+<!----End Route Groups----->
 
+
+<!----Fallback Routes----->
+
+Route::fallback(function () {
+    return 'Fallback';
+});
+
+<!----End Fallback Routes---->
+
+<!----View Registered Routes with Artisan----->
+
+
+<!----End View Registered Routes with Artisan----->
