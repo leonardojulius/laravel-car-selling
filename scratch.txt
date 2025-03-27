@@ -110,5 +110,116 @@ Route::fallback(function () {
 
 <!----View Registered Routes with Artisan----->
 
+php artisan route:list
+
+php artisan route:list -v //Middleware
+
+php artisan route:list --except-vendor //exclude vendor
+
+php artisan route:list --only-vendor // vendor only
+
+php artisan route:list -v --except-vendor --path=admin
+
+php artisan route:cache
+
+php artisan route:clear
 
 <!----End View Registered Routes with Artisan----->
+
+
+<!---Challenge--->
+
+Route::get('/sum/{a}/{b}',function(float $a, float $b) {
+    return $a + $b;
+})->whereNumber(['a','b']);
+
+<!---End Challenge--->
+
+
+<!---basic controllers--->
+
+php artisan make:controller CarController // Located at app/Http/Controllers/CarController.php
+
+@web.php
+Route::get('/car',[CarController::class,'index']);
+
+<!---End basic controllers--->
+
+
+Time 1:17
+<!---Group Routes by Controller--->
+
+@web.php
+    Route::controller(CarController::class)->group(function(){
+    Route::get('/car', 'index');
+    Route::get('my-cars','myCars');
+});
+
+<!---End Routes by Controller--->
+
+<!---Single Action Controller--->
+php artisan make:controller ShowCarController --invokable
+
+Route::get('/car/invokable',CarController::class);
+Route::get('/car',[CarController::class,'index']);
+
+
+  public function __invoke() {
+        return '__invoke';
+
+    }
+
+<!---End Single Action Controller--->
+
+
+//Time 1:22:52
+<!---Resource Controller--->
+php artisan make:controller ProductController --resource
+
+php artisan route:list
+
+Route::resource('/products', ProductController::class)->except(['destroy']); //exclude
+Route::resource('/products', ProductController::class)->only(['index','show']);
+
+Route::apiResource('/products', ProductController::class);//For Api Resource
+
+php artisan make:controller CarController --api //Exclude Create and Edit after generating.
+
+//Grouping
+Route::apiResources([
+    'cars' => CarController::class,
+    'products' => ProductController::class,
+]);
+
+<!---End Resource Controller--->
+
+1:30:50
+Challenge
+
+<!---Challenge--->
+
+    @web.php  //
+
+    Route::controller(OperationController::class)->group(function(){
+        Route::get('/sum/{a}/{b}','sum')->whereNumber(['a','b']);
+        Route::get('/subtract/{a}/{b}','sub')->whereNumber(['a','b']);
+    });
+
+
+    @OperationController //
+
+       public function sum(float $a, float $b) {
+
+            return  $a + $b;
+
+        }
+        public function sub($a,$b) {
+            return $a - $b;
+        }
+
+<!---End Challenge--->
+
+
+1:34:06
+
+Create HomeController
