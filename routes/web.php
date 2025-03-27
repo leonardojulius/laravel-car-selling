@@ -1,17 +1,10 @@
 <?php
 
-use App\Http\Controllers\CarController;
-use App\Http\Controllers\OperationController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ShowCarController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
+Route::get('/',[HomeController::class,'index'])->name('home');
 Route::view('/about', 'about')->name('about');
 
 
