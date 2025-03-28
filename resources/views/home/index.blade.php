@@ -1,2 +1,8 @@
 <h1>Hello From Laravel Course</h1>
-<p>My name is {{$name}} {{$surname}}</p>
+
+{{date('Y')}}
+<p>{{strtoupper($name . ' ' . $surname)}}</p>
+{!! $job !!}
+<p>{{Illuminate\Support\Str::after("Hello World","Hello ")}}</p>
+<p>{{Illuminate\Foundation\Application::VERSION}}</p>
+<p>{{PHP_VERSION}}</p>

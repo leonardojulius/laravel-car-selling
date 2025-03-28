@@ -283,3 +283,88 @@ php artisan make:view home.index
     }
 
 <!---End Pass Data to Views--->
+
+
+1:45:07
+
+<!---Share Data Between all Views--->
+
+ @app\Providers\AppServiceProvider.php
+ use Illuminate\Support\Facades\View;
+
+ public function boot(): void
+    {
+        //
+        View::share('year', date('Y'));
+    }
+
+@resources\views\home\index.blade.php
+
+<p>Year: {{$year}}</p>
+
+<!---End Share Data Between all Views--->
+
+1:46:14
+
+<!---Challenge--->
+
+php artisan make:controller HelloController
+
+php artisan make:view hello.welcome
+
+@routes\web.php
+
+Route::get('/hello',[HelloController::class,'welcome'])->name('hello');
+
+@app\Http\Controllers\HelloController.php
+ public function welcome(){
+
+        return view('hello.welcome')
+        ->with('name','julius')
+        ->with('surname','leonardo');
+
+    }
+
+  @resources\views\hello\welcome.blade.php
+
+  <h1>Welcome to Hello Blade</h1>
+  <p>My  name is {{$name}} {{$surname}}</p>
+
+<!---End Challenge--->
+
+1:49:48
+
+<!--- Using Functions in Blade Files --->
+
+@resources\views\home\index.blade.php
+
+{{date('Y')}}
+<p>{{strtoupper($name . ' ' . $surname)}}</p>
+<p>{{Illuminate\Support\Str::after("Hello World","Hello ")}}</p>
+<p>{{Illuminate\Foundation\Application::VERSION}}</p>
+<p>{{PHP_VERSION}}</p>
+
+
+<!--- End Using Functions in Blade Files --->
+
+1:51:32
+
+<!---Display Unescaped Data--->
+
+@app\Http\Controllers\HomeController.php
+   public function index(){
+      return view('home.index')
+      ->with('name','Julius')
+      ->with('surname','Leonardo')
+      ->with('job','<b>Developer</b>');
+    }
+@resources\views\home\index.blade.php
+    {!! $job !!}
+<!---End Display Unescaped Data--->
+
+1:52:55
+
+<!--- Blade and Javascript Frameworks --->
+
+
+<!--- End Blade and Javascript Frameworks --->

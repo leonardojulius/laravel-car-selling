@@ -10,6 +10,7 @@ class HomeController extends Controller
     public function index(){
       return view('home.index')
       ->with('name','Julius')
-      ->with('surname','Leonardo');
+      ->with('surname','Leonardo')
+      ->with('job','<b>Developer</b>');
     }
 }
