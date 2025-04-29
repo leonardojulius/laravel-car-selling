@@ -366,5 +366,93 @@ Route::get('/hello',[HelloController::class,'welcome'])->name('hello');
 
 <!--- Blade and Javascript Frameworks --->
 
+    <div>
+        Name: {{name}}
+        Age: {{age}}
+        Job: {{Job}}
+        Hobbies: {{hobbies}}
+        @if
+    </div>
+@endverbatim
 
 <!--- End Blade and Javascript Frameworks --->
+
+1:57:26
+
+<!--- Rendering JSON --- >
+
+@app\Http\Controllers\HomeController.php
+
+ public function index(){
+      return view('home.index')
+      ->with('name','Julius')
+      ->with('surname','Leonardo')
+      ->with('job','<b>Developer</b>')
+      ->with('hobbies',['Tennis','Fishing']);
+    }
+
+ @resources\views\home\index.blade.php
+
+
+<script>
+    const hobbies =  {{\Illuminate\Support\Js::from($hobbies)}}
+</script>
+
+    @verbatim
+        <div>
+            Name: {{name}}
+            Age: {{age}}
+            Job: {{Job}}
+            Hobbies: {{hobbies}}
+            @if
+        </div>
+    @endverbatim
+<!--- End Rendering JSON --- >
+
+2:00:04
+
+
+<!--- What are Blade Directives --->
+
+>Template Inheritance
+
+>Conditional Rendering
+
+>Looping Through Data
+
+ CORE FEATURES OF Directives
+ *Steamline Template Creation
+ *Reduce Boilerplate Code
+ *More Focus on Content And logic
+
+<!--- End (What are Blade Directives) --->
+
+2:01:12
+
+
+<!--- Some text --->
+
+{{--{{ $name}}--}}
+
+{{-- Single line comment --}}
+
+{{--
+
+Multi
+line
+Comment
+
+--}}
+
+
+<!--- Blade Comments-->
+
+
+2:03:38
+
+{{-- Conditional Directives --}}
+
+@if (true)
+    This will be displayed
+@endif
+{{-- End Conditional Directives --}}
